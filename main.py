@@ -1,6 +1,7 @@
 import json
 import os
 import pandas as pd
+import torch
 
 
 def read_json_file(file_path):
@@ -88,4 +89,10 @@ def rank_policy_sell(output_name):
 
 
 for function in [rank_policy_buy, rank_policy_sell]:
-    function('G4540_predict_20230820_a3c_lstm')
+    for sector in ['G4050', 'G4510', 'G4530', 'G4540', 'G5010', 'G5020', 'G5510']:
+        for update_date in ['20230904']:
+            for learner in ['a3c_lstm']:
+                for net in ['policy', 'value']:
+                    function(f'{sector}_predict_{update_date}_{learner}_{net}')
+
+# Path: ai-model/output/G4050_predict_20230904_a3c_lstm_policy
